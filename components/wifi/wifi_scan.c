@@ -4,6 +4,7 @@
 #include "nvs_flash.h"
 #include "nvs.h"
 #include "stdlib.h"
+
 #define STORAGE_NAMESPACE "storage"
 static const char *TAG = "scan";
 static wifi_ap_record_t ap_info_sort[10] = {0};
@@ -147,21 +148,5 @@ void wifi_scan(void)
     }
     //sorting by signal strength
 
-    if (ap_count > 0)
-    {
-
-        qsort(rssi_arr, ap_count, sizeof(int), comp1);
-
-        for (int i = 0; i < ap_count; i++)
-        {
-            for (int x = 0; x < DEFAULT_SCAN_LIST_SIZE; x++)
-            {
-                if ((abs(ap_info[x].rssi) == rssi_arr[i]) && (ap_info[x].reserved == 0))
-                {
-                    ap_info_sort[i] = ap_info[x];
-                    ap_info[x].reserved = 1;
-                }
-            }
-        }
-    }
+   
 }
